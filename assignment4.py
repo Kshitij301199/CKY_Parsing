@@ -53,7 +53,38 @@ def main():
         #         1) Like asked in the instruction, derive at least two sentences that
         #         exhibit structural ambiguity and indicate the different analyses
         #         (at least two per sentence) with a syntactic tree.
-        pass
+        sentence1 = "Simone caught the butterfly by the bush"
+        sentence2 = "Annoying ants can lead to trouble"
+
+        print(f"First sentence : {sentence1} \n")
+        sentence1_structure1 = "\
+            (S  (NP (N Simone))\
+                    (VP (V caught)\
+                        (NP (Det the)\
+                            (N butterfly))\
+                        (PP (P by)\
+                            (NP (Det the)\
+                                (N bush))\
+                            )\
+                    )\
+            )"
+        Tree.fromstring(sentence1_structure1).pretty_print(unicodelines = True, nodedist = 1)
+        print(f"\nMeaning : Simone caught the butterfly that was fluttering near the bush \n")
+        sentence1_structure2 = "\
+                        (S\
+                            (VP (NP (N Simone))\
+                                (VP (V caught))\
+                                (NP (Det the)\
+                                    (N butterfly)))\
+                            (PP (P by)\
+                                (NP (Det the)\
+                                    (N bush))\
+                            )\
+                        )"
+                                
+        Tree.fromstring(sentence1_structure2).pretty_print(unicodelines = True, nodedist = 1)
+        print(f"\nMeaning : Simone caught the butterfly while she was next to the bush \n")
+    
     elif args.recognizer:
         # YOUR CODE HERE
         #     TODO:
