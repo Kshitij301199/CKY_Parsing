@@ -2,6 +2,7 @@ import argparse
 import nltk
 
 from nltk.tree import Tree
+from nltk.treeprettyprinter import TreePrettyPrinter
 from model.recognizer import recognize
 from model.parser import parse, count
 
@@ -53,8 +54,8 @@ def main():
         #         1) Like asked in the instruction, derive at least two sentences that
         #         exhibit structural ambiguity and indicate the different analyses
         #         (at least two per sentence) with a syntactic tree.
-        sentence1 = "Simone caught the butterfly by the bush"
-        sentence2 = "Annoying ants can lead to trouble"
+        sentence1 = "Simone caught the butterfly by the bush."
+        sentence2 = "The child looked at the lady using the magnifying glass."
 
         print(f"First sentence : {sentence1} \n")
         sentence1_structure1 = "\
@@ -68,22 +69,72 @@ def main():
                             )\
                     )\
             )"
-        Tree.fromstring(sentence1_structure1).pretty_print(unicodelines = True, nodedist = 1)
-        print(f"\nMeaning : Simone caught the butterfly that was fluttering near the bush \n")
+        tree1 = Tree.fromstring(sentence1_structure1)
+        print(TreePrettyPrinter(tree1).text())
+        print("\nMeaning : Simone caught the butterfly that was fluttering near the bush \n")
         sentence1_structure2 = "\
-                        (S\
-                            (VP (NP (N Simone))\
-                                (VP (V caught))\
-                                (NP (Det the)\
-                                    (N butterfly)))\
-                            (PP (P by)\
-                                (NP (Det the)\
-                                    (N bush))\
-                            )\
-                        )"
+            (S\
+                (VP (NP (N Simone))\
+                    (VP (V caught))\
+                    (NP (Det the)\
+                        (N butterfly)))\
+                (PP (P by)\
+                    (NP (Det the)\
+                        (N bush))\
+                )\
+            )"
                                 
-        Tree.fromstring(sentence1_structure2).pretty_print(unicodelines = True, nodedist = 1)
-        print(f"\nMeaning : Simone caught the butterfly while she was next to the bush \n")
+        tree2 = Tree.fromstring(sentence1_structure2)
+        print(TreePrettyPrinter(tree2).text())
+        print("\nMeaning : Simone caught the butterfly while she was next to the bush \n")
+        
+        print(f"Second sentence : {sentence2} \n")
+        sentence2_structure1 = "\
+            (S\
+                (CP (TP (NP (Det the)\
+                                (N child))\
+                            (VP (V looked)\
+                                (PP (P at)\
+                                    (NP (Det the)\
+                                        (N lady))))))\
+                    (VP (V using)\
+                        (NP (Det the)\
+                            (Adj magnifying)\
+                            (N glass)))\
+            )"
+            
+        tree3 = Tree.fromstring(sentence2_structure1)
+        print(TreePrettyPrinter(tree3).text())
+        print("\nMeaning : The child is looking at the lady while using a magnifying glass \n")
+        sentence2_structure2 = "\
+            (S\
+                (VP (NP (Det the)\
+                            (N child))\
+                            (V looked))\
+                (PP (PP (P at)\
+                        (NP (Det the)\
+                            (N lady)))\
+                    (VP (V using)\
+                        (NP (Det the)\
+                            (Adj magnifying)\
+                            (N glass))))\
+            )"
+            
+        tree4 = Tree.fromstring(sentence2_structure2)
+        print(TreePrettyPrinter(tree4).text())
+        print("\nMeaning : The child is looking at the lady who is using a magnifying glass \n")
+        
+        with open("./output/structural_ambiguity.txt", "w", newline="") as file:
+            file.write(f"First sentence : {sentence1} \n")
+            file.write(TreePrettyPrinter(tree1).text())
+            file.write("\nMeaning : Simone caught the butterfly that was fluttering near the bush \n")
+            file.write(TreePrettyPrinter(tree2).text())
+            file.write("\nMeaning : Simone caught the butterfly while she was next to the bush \n")
+            file.write(TreePrettyPrinter(tree3).text())
+            file.write("\nMeaning : The child is looking at the lady while using a magnifying glass \n")
+            file.write(TreePrettyPrinter(tree4).text())
+            file.write("\nMeaning : The child is looking at the lady who is using a magnifying glass \n")
+            
     
     elif args.recognizer:
         # YOUR CODE HERE

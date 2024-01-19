@@ -1,0 +1,55 @@
+First sentence : Simone caught the butterfly by the bush. 
+         S                                      
+   ______|________________                       
+  |                       VP                    
+  |       ________________|__________            
+  |      |         |                 PP         
+  |      |         |              ___|___        
+  NP     |         NP            |       NP     
+  |      |      ___|______       |    ___|___    
+  N      V    Det         N      P  Det      N  
+  |      |     |          |      |   |       |   
+Simone caught the     butterfly  by the     bush
+
+Meaning : Simone caught the butterfly that was fluttering near the bush 
+                          S                     
+          ________________|__________            
+         VP                          PP         
+   ______|_________               ___|___        
+  NP     VP        NP            |       NP     
+  |      |      ___|______       |    ___|___    
+  N      V    Det         N      P  Det      N  
+  |      |     |          |      |   |       |   
+Simone caught the     butterfly  by the     bush
+
+Meaning : Simone caught the butterfly while she was next to the bush 
+                              S                                         
+                 _____________|______________________                    
+                CP                                   |                  
+                |                                    |                   
+                TP                                   |                  
+      __________|_________                           |                   
+     |                    VP                         |                  
+     |           _________|___                       |                   
+     |          |             PP                     VP                 
+     |          |      _______|___           ________|______             
+     NP         |     |           NP        |               NP          
+  ___|____      |     |        ___|___      |     __________|________    
+Det       N     V     P      Det      N     V   Det        Adj       N  
+ |        |     |     |       |       |     |    |          |        |   
+the     child looked  at     the     lady using the     magnifying glass
+
+Meaning : The child is looking at the lady while using a magnifying glass 
+                          S                                         
+           _______________|_____________                             
+          |                             PP                          
+          |                _____________|________                    
+          VP              PP                     VP                 
+      ____|_____       ___|___           ________|______             
+     NP         |     |       NP        |               NP          
+  ___|____      |     |    ___|___      |     __________|________    
+Det       N     V     P  Det      N     V   Det        Adj       N  
+ |        |     |     |   |       |     |    |          |        |   
+the     child looked  at the     lady using the     magnifying glass
+
+Meaning : The child is looking at the lady who is using a magnifying glass 
