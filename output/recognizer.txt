@@ -1,0 +1,30 @@
+Sentence : show the flights .
+`show the flights .` is in the language of CFG.
+Sentence : can i have the fare .
+`can i have the fare .` is in the language of CFG.
+Sentence : i 'd like an afternoon flight .
+`i 'd like an afternoon flight .` is in the language of CFG.
+Sentence : which flights use a large plane .
+`which flights use a large plane .` is in the language of CFG.
+Sentence : list round trips .
+`list round trips .` is in the language of CFG.
+Sentence : show me northwest flights to detroit .
+`show me northwest flights to detroit .` is in the language of CFG.
+Sentence : oakland to salt lake city .
+`oakland to salt lake city .` is in the language of CFG.
+Sentence : show availability .
+`show availability .` is in the language of CFG.
+Sentence : list saturday flights .
+`list saturday flights .` is in the language of CFG.
+Sentence : list flights from cleveland .
+`list flights from cleveland .` is in the language of CFG.
+`what is the flying time from .` is not in the language of CFG.
+`i can only spend a hundred fifty dollars .` is not in the language of CFG.
+`what aircraft is this .` is not in the language of CFG.
+`which flights are cheapest .` is not in the language of CFG.
+`what is the duration of this flight .` is not in the language of CFG.
+`list these economy fares .` is not in the language of CFG.
+`which city is cheapest to fly into .` is not in the language of CFG.
+`list these city destinations .` is not in the language of CFG.
+`are any fares cheaper than these .` is not in the language of CFG.
+`what area does canadian airlines international service .` is not in the language of CFG.

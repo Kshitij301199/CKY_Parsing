@@ -1,10 +1,12 @@
 import argparse
 import nltk
+import random
 
 from nltk.tree import Tree
 from nltk.treeprettyprinter import TreePrettyPrinter
 from model.recognizer import recognize
 from model.parser import parse, count
+
 
 GRAMMAR_PATH = './data/atis-grammar-cnf.cfg'
 
@@ -49,11 +51,6 @@ def main():
     t = nltk.parse.util.extract_test_sentences(s)
 
     if args.structural:
-        # YOUR CODE HERE
-        #     TODO:
-        #         1) Like asked in the instruction, derive at least two sentences that
-        #         exhibit structural ambiguity and indicate the different analyses
-        #         (at least two per sentence) with a syntactic tree.
         sentence1 = "Simone caught the butterfly by the bush."
         sentence2 = "The child looked at the lady using the magnifying glass."
 
@@ -137,26 +134,32 @@ def main():
             
     
     elif args.recognizer:
-        # YOUR CODE HERE
-        #     TODO:
-        #         1) Provide a list of grammatical and ungrammatical sentences (at least 10 each)
-        #         and test your recognizer on these sentences.
-        grammatical = []
-        ungrammatical = []
+        no_parse = [t[index][0] for index in range(len(t)) if t[index][1] == 0 and len(t[index][0]) <= 9]
+        yes_parse = [t[index][0] for index in range(len(t)) if t[index][1] != 0 and len(t[index][0]) <= 7]
+        
+        random.seed(42)
+        grammatical = random.sample(yes_parse,10)
+        ungrammatical = random.sample(no_parse,10)
+        with open("./output/recognizer.txt", "w", newline = "") as file:
+            for sents in grammatical:
+                print(f"Sentence : {' '.join(sents)}")
+                file.write(f"Sentence : {' '.join(sents)}\n")
+                val = recognize(grammar, sents)
+                if val:
+                    print(f"`{' '.join(sents)}` is in the language of CFG.")
+                    file.write(f"`{' '.join(sents)}` is in the language of CFG.\n")
+                else:
+                    print(f"`{' '.join(sents)}` is not in the language of CFG.")
+                    file.write(f"`{' '.join(sents)}` is not in the language of CFG.\n")
 
-        for sents in grammatical:
-            val = recognize(grammar, sents)
-            if val:
-                print("{} is in the language of CFG.".format(sents))
-            else:
-                print("{} is not in the language of CFG.".format(sents))
-
-        for sents in ungrammatical:
-            val = recognize(grammar, sents)
-            if val:
-                print("{} is in the language of CFG.".format(sents))
-            else:
-                print("{} is not in the language of CFG.".format(sents))
+            for sents in ungrammatical:
+                val = recognize(grammar, sents)
+                if val:
+                    print(f"`{' '.join(sents)}` is in the language of CFG.")
+                    file.write(f"`{' '.join(sents)}` is in the language of CFG.\n")
+                else:
+                    print(f"`{' '.join(sents)}` is not in the language of CFG.")
+                    file.write(f"`{' '.join(sents)}` is not in the language of CFG.\n")
 
     elif args.parser:
         # We test the parser by using ATIS test sentences.
