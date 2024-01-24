@@ -1,0 +1,267 @@
+ID	 Predicted_Tree	Labeled_Tree
+Sentence : i need a flight from charlotte to las vegas that makes a stop in saint louis .
+0	 11	 	2085
+Sentence : what is the cheapest one way flight from phoenix to san diego that arrives in the morning on thursday june second .
+1	 8	 	1380
+Sentence : what is the cheapest one way flight from columbus to indianapolis .
+2	 5	 	50
+Sentence : is there a flight from memphis to los angeles .
+3	 5	 	18
+Sentence : what aircraft is this .
+4	 0	 	0
+what aircraft is this . is not in the language of the CFG
+Sentence : please show me the flights from chicago to detroit that arrive at six p.m. next tuesday .
+5	 3	 	20
+Sentence : what flights are available between chicago and indianapolis next wednesday between eleven a.m. and one p.m .
+6	 0	 	0
+what flights are available between chicago and indianapolis next wednesday between eleven a.m. and one p.m . is not in the language of the CFG
+Sentence : please book a one way coach fare from chicago to indianapolis on united flight two ninety two next wednesday .
+7	 0	 	0
+please book a one way coach fare from chicago to indianapolis on united flight two ninety two next wednesday . is not in the language of the CFG
+Sentence : show me flights from chicago to kansas city leaving around seven p.m. thursday .
+8	 14	 	1059
+Sentence : show american flights after twelve p.m. from miami to chicago .
+9	 0	 	0
+show american flights after twelve p.m. from miami to chicago . is not in the language of the CFG
+Sentence : does united flight four seven four slash fourteen eighty four serve dinner .
+10	 0	 	0
+does united flight four seven four slash fourteen eighty four serve dinner . is not in the language of the CFG
+Sentence : what kind of aircraft is american 's flight fifteen oh one that departs at six fifty nine p.m .
+11	 0	 	0
+what kind of aircraft is american 's flight fifteen oh one that departs at six fifty nine p.m . is not in the language of the CFG
+Sentence : show me flights from detroit to san diego on tuesday may third .
+12	 0	 	0
+show me flights from detroit to san diego on tuesday may third . is not in the language of the CFG
+Sentence : i 'd like to fly from indianapolis to houston on t w a and the plane should arrive around eleven a.m .
+13	 0	 	0
+i 'd like to fly from indianapolis to houston on t w a and the plane should arrive around eleven a.m . is not in the language of the CFG
+Sentence : how much does first class on that flight cost and how much does coach on that flight cost .
+14	 2	 	54
+Sentence : can you tell me about the flights from saint petersburg to toronto again .
+15	 1	 	3
+Sentence : i would like to find a flight from charlotte to las vegas .
+16	 2	 	55
+Sentence : what if i wanted to leave on may fifth .
+17	 0	 	0
+what if i wanted to leave on may fifth . is not in the language of the CFG
+Sentence : i would like to leave on thursday morning may fifth before six a.m .
+18	 0	 	0
+i would like to leave on thursday morning may fifth before six a.m . is not in the language of the CFG
+Sentence : how far is it from the airport to the city .
+19	 1	 	1
+Sentence : can i have the fare .
+20	 1	 	1
+Sentence : show availability .
+21	 3	 	3
+Sentence : show me northwest flights to detroit .
+22	 6	 	17
+Sentence : show the flights .
+23	 1	 	2
+Sentence : prices .
+24	 2	 	2
+Sentence : list those flights that stop over in salt lake city .
+25	 6	 	11
+Sentence : list these economy fares .
+26	 0	 	0
+list these economy fares . is not in the language of the CFG
+Sentence : what is e w r .
+27	 1	 	1
+Sentence : list these city destinations .
+28	 0	 	0
+list these city destinations . is not in the language of the CFG
+Sentence : list u s air flights from dallas to boston .
+29	 21	 	597
+Sentence : please list the flights leaving newark stopping over in seattle for approximately five hours and then on to san francisco .
+30	 3	 	44
+Sentence : what area does canadian airlines international service .
+31	 0	 	0
+what area does canadian airlines international service . is not in the language of the CFG
+Sentence : please list all flights from pittsburgh to toronto on nationair and canadian airlines international .
+32	 19	 	437
+Sentence : i want to leave before noon .
+33	 1	 	1
+Sentence : how long is the stop in dallas on flight d l nine thirty one .
+34	 1	 	6
+Sentence : i want first class on flight one one one nine .
+35	 1	 	15
+Sentence : count the number of flights between nine a.m. and twelve noon .
+36	 0	 	0
+count the number of flights between nine a.m. and twelve noon . is not in the language of the CFG
+Sentence : please give me the number of flights that depart from lester b pearson international airport on april twenty fifth .
+37	 0	 	0
+please give me the number of flights that depart from lester b pearson international airport on april twenty fifth . is not in the language of the CFG
+Sentence : how many flights leave from lester b pearson international airport between nine a.m. and twelve noon .
+38	 0	 	0
+how many flights leave from lester b pearson international airport between nine a.m. and twelve noon . is not in the language of the CFG
+Sentence : please show me all first class flights from pittsburgh to newark on monday morning .
+39	 5	 	598
+Sentence : how much does flight number a nineteen cost from new york to los angeles on monday morning .
+40	 41	 	8913
+Sentence : please show me all first class flights from indianapolis to memphis leaving monday morning .
+41	 5	 	569
+Sentence : how much does a first class round trip ticket from detroit to saint petersburg cost .
+42	 57	 	28250
+Sentence : please show me all flights from montreal to las vegas .
+43	 3	 	9
+Sentence : please show me all flights from ontario to salt lake city leaving monday morning .
+44	 4	 	1010
+Sentence : i need a first class round trip airfare from detroit to saint petersburg .
+45	 9	 	6153
+Sentence : i need the shortest evening flight from tampa to cincinnati .
+46	 6	 	32
+Sentence : how far is the airport from new york 's la guardia to downtown .
+47	 1	 	7
+Sentence : how much is the fare limousine san francisco to downtown .
+48	 1	 	8
+Sentence : i need a flight from pittsburgh to newark on monday .
+49	 6	 	136
+Sentence : i need a flight from los angeles to minneapolis thursday afternoon .
+50	 10	 	295
+Sentence : i need a flight from philadelphia to westchester county .
+51	 5	 	21
+Sentence : what flights leave los angeles arriving in minneapolis .
+52	 4	 	10
+Sentence : what is the cheapest ticket from memphis to miami .
+53	 4	 	5
+Sentence : what flights leave boston to pittsburgh .
+54	 2	 	3
+Sentence : what meals are served on flight h p five four .
+55	 1	 	10
+Sentence : what flights leave las vegas to oakland .
+56	 2	 	3
+Sentence : how many times a day can i fly from boston to pittsburgh to newark to boston .
+57	 0	 	0
+how many times a day can i fly from boston to pittsburgh to newark to boston . is not in the language of the CFG
+Sentence : show me the airlines and flight numbers .
+58	 4	 	10
+Sentence : i 'd like the cheapest round trip ticket from minneapolis to san diego arriving in san diego before seven p.m .
+59	 9	 	36122
+Sentence : what airlines fly from toronto to detroit .
+60	 4	 	6
+Sentence : i 'd like an afternoon flight .
+61	 3	 	9
+Sentence : what flights departing montreal have less than one hundred and fifty dollars round trip fare .
+62	 20	 	293
+Sentence : which city is cheapest to fly into .
+63	 0	 	0
+which city is cheapest to fly into . is not in the language of the CFG
+Sentence : are any fares cheaper than these .
+64	 0	 	0
+are any fares cheaper than these . is not in the language of the CFG
+Sentence : what is the fare .
+65	 2	 	2
+Sentence : i 'll be leaving on a friday at four o'clock .
+66	 0	 	0
+i 'll be leaving on a friday at four o'clock . is not in the language of the CFG
+Sentence : i 'd like to leave before eight o'clock at night .
+67	 2	 	5
+Sentence : i 'd like to fly from buffalo to either orlando or long beach .
+68	 0	 	0
+i 'd like to fly from buffalo to either orlando or long beach . is not in the language of the CFG
+Sentence : i 'd like to fly out of chicago for less than a hundred fifty dollars round trip .
+69	 0	 	0
+i 'd like to fly out of chicago for less than a hundred fifty dollars round trip . is not in the language of the CFG
+Sentence : i can only spend a hundred fifty dollars .
+70	 0	 	0
+i can only spend a hundred fifty dollars . is not in the language of the CFG
+Sentence : i 'd like to leave on a saturday .
+71	 2	 	13
+Sentence : which flights are cheapest .
+72	 0	 	0
+which flights are cheapest . is not in the language of the CFG
+Sentence : what is the cheapest first class ticket available flying from new york to miami one way but also round trip .
+73	 14	 	716
+Sentence : what flights do you have available on march twenty fourth leaving minneapolis arriving in seattle by .
+74	 0	 	0
+what flights do you have available on march twenty fourth leaving minneapolis arriving in seattle by . is not in the language of the CFG
+Sentence : does delta fly to boston from denver .
+75	 12	 	22
+Sentence : what is the duration of this flight .
+76	 0	 	0
+what is the duration of this flight . is not in the language of the CFG
+Sentence : what is the flying time from .
+77	 0	 	0
+what is the flying time from . is not in the language of the CFG
+Sentence : list flights from cleveland .
+78	 5	 	5
+Sentence : oakland to salt lake city .
+79	 12	 	19
+Sentence : milwaukee to detroit .
+80	 2	 	2
+Sentence : indianapolis to seattle .
+81	 2	 	2
+Sentence : list round trips .
+82	 7	 	11
+Sentence : list saturday flights .
+83	 5	 	5
+Sentence : what type of aircraft is used on a flight from cleveland to dallas that leaves before noon .
+84	 4	 	24
+Sentence : the flight going to san diego from toronto should stop in denver .
+85	 0	 	0
+the flight going to san diego from toronto should stop in denver . is not in the language of the CFG
+Sentence : find a flight from washington d c to milwaukee .
+86	 20	 	200
+Sentence : find a flight from washington d c to montreal .
+87	 20	 	200
+Sentence : please tell me the round trip cost for these flights .
+88	 4	 	72
+Sentence : what are the costs .
+89	 2	 	4
+Sentence : please list flights departing from toronto canada to washington on saturday .
+90	 10	 	354
+Sentence : please list costs of round trip fares from denver to atlanta .
+91	 11	 	229
+Sentence : orlando to kansas city and then to minneapolis .
+92	 3	 	46
+Sentence : please give me a one way flight from washington to cincinnati .
+93	 3	 	106
+Sentence : i would like a flight from orlando to kansas city .
+94	 7	 	85
+Sentence : which flights use a large plane .
+95	 6	 	17
+Sentence : i need an american airlines flight number from chicago to philadelphia departing six p.m .
+96	 8	 	1645
+Sentence : for american airlines i need round trip airfare from new york to san diego .
+97	 1	 	7
+Sentence : list saturday flights .
+                 SIGMA                        
+    _______________|______                     
+   |                     GXA                  
+   |        ______________|_____               
+   |       |                   GXB            
+   |       |               _____|_______       
+VERB_VB  NP_NP          NP_NNS     pt_char_per
+   |       |              |             |      
+  list  saturday       flights          .     
+                     SIGMA                         
+         ______________|_____________               
+      NP_NP                         KCJ            
+   _____|______                ______|_______       
+NP_NN       NOUN_NP        NOUN_NNS     pt_char_per
+  |            |              |              |      
+ list       saturday       flights           .     
+                 SIGMA                      
+    _______________|_______                  
+   |                      JKB               
+   |                _______|__________       
+   |             NP_NNS               |     
+   |        _______|_______           |      
+VERB_VB  NP_NP          NOUN_NNS pt_char_per
+   |       |               |          |      
+  list  saturday        flights       .     
+                        SIGMA                         
+           _______________|_____________               
+        NP_NN                          KCD            
+    ______|_______                ______|_______       
+NOUN_NN       NAPPOS_NP       NOUN_NNS     pt_char_per
+   |              |              |              |      
+  list         saturday       flights           .     
+                   SIGMA                       
+    _________________|________                  
+   |                         JWS               
+   |                  ________|__________       
+   |             RELCL_VBZ               |     
+   |        _________|________           |      
+NOUN_NN  NP_NP             VERB_VBZ pt_char_per
+   |       |                  |          |      
+  list  saturday           flights       .     

@@ -1,12 +1,12 @@
 import argparse
-import nltk
 import random
+import nltk
 
 from nltk.tree import Tree
 from nltk.treeprettyprinter import TreePrettyPrinter
 from model.recognizer import recognize
-from model.parser import parse, count
-from nltk.draw.tree import draw_trees
+from model.parser import parse
+# from nltk.draw.tree import draw_trees
 
 
 GRAMMAR_PATH = './data/atis-grammar-cnf.cfg'
@@ -165,29 +165,41 @@ def main():
                     file.write(f"`{' '.join(sents)}` is not in the language of CFG.\n")
 
     elif args.parser:
-        # We test the parser by using ATIS test sentences.
-        print("ID\t Predicted_Tree\tLabeled_Tree")
-        for idx, sents in enumerate(t):
-            tree = parse(grammar, sents[0])
-            if tree is None:
-                print(f"{' '.join(sents[0])} is not in the language of the CFG")
-            else:
-                print(f"{idx}\t {len(tree)}\t \t{sents[1]}")
-
-        yes_parse_l5 = [t[index][0] for index in range(len(t)) if t[index][1] != 0 and len(t[index][0]) < 5]
-        sentence = random.sample(yes_parse_l5,1)[0]
         with open("./output/parser.txt", "w", newline = "") as file:
-            print(f"Sentence : {' '.join(sents)}")
+        # We test the parser by using ATIS test sentences.
+            print("ID\t Predicted_Tree\tLabeled_Tree")
+            file.write("ID\t Predicted_Tree\tLabeled_Tree\n")
+            for idx, sents in enumerate(t):
+                print(f"Sentence : {' '.join(sents[0])}")
+                file.write(f"Sentence : {' '.join(sents[0])}\n")
+                tree = parse(grammar, sents[0])
+                if tree is None:
+                    print(f"{idx}\t 0\t \t{sents[1]}")
+                    print(f"{' '.join(sents[0])} is not in the language of the CFG")
+                    file.write(f"{idx}\t 0\t \t{sents[1]}\n")
+                    file.write(f"{' '.join(sents[0])} is not in the language of the CFG\n")
+                else:
+                    print(f"{idx}\t {len(tree)}\t \t{sents[1]}\n")
+                    file.write(f"{idx}\t {len(tree)}\t \t{sents[1]}\n")
+
+            yes_parse_l5 = [t[index][0] for index in range(len(t)) if t[index][1] != 0 and len(t[index][0]) < 5]
+            sentence = random.sample(yes_parse_l5,1)[0]
+            
+            print(f"Sentence : {' '.join(sentence)}")
+            file.write(f"Sentence : {' '.join(sentence)}\n")
             trees = parse(grammar,sentence)
             for tree in trees:
-                draw_trees(tree)
-                
+                print(TreePrettyPrinter(Tree.fromstring(tree.pformat().replace("\n",""))).text())
+                file.write(TreePrettyPrinter(Tree.fromstring(tree.pformat().replace("\n",""))).text())
+            
 
     elif args.count:
-        print("ID\t Predicted_Tree\tLabeled_Tree")
-        for idx, sents in enumerate(t):
-            num_tree = count(grammar, sents[0])
-            print("{}\t {}\t \t{}".format(idx, num_tree, sents[1]))
+        print("Counting")
+        print("count not implemented")
+        # print("ID\t Predicted_Tree\tLabeled_Tree")
+        # for idx, sents in enumerate(t):
+        #     num_tree = count(grammar, sents[0])
+        #     print("{}\t {}\t \t{}".format(idx, num_tree, sents[1]))
 
 
 if __name__ == "__main__":
