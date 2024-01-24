@@ -6,6 +6,7 @@ from nltk.tree import Tree
 from nltk.treeprettyprinter import TreePrettyPrinter
 from model.recognizer import recognize
 from model.parser import parse, count
+from nltk.draw.tree import draw_trees
 
 
 GRAMMAR_PATH = './data/atis-grammar-cnf.cfg'
@@ -153,6 +154,8 @@ def main():
                     file.write(f"`{' '.join(sents)}` is not in the language of CFG.\n")
 
             for sents in ungrammatical:
+                print(f"Sentence : {' '.join(sents)}")
+                file.write(f"Sentence : {' '.join(sents)}\n")
                 val = recognize(grammar, sents)
                 if val:
                     print(f"`{' '.join(sents)}` is in the language of CFG.")
@@ -166,13 +169,19 @@ def main():
         print("ID\t Predicted_Tree\tLabeled_Tree")
         for idx, sents in enumerate(t):
             tree = parse(grammar, sents[0])
-            print("{}\t {}\t \t{}".format(idx, len(tree), sents[1]))
+            if tree is None:
+                print(f"{' '.join(sents[0])} is not in the language of the CFG")
+            else:
+                print(f"{idx}\t {len(tree)}\t \t{sents[1]}")
 
-        # YOUR CODE HERE
-        #     TODO:
-        #         1) Choose an ATIS test sentence with a number of parses p
-        #         such that 1 < p < 5. Visualize its parses. You can use `draw` 
-        #         method to do this.
+        yes_parse_l5 = [t[index][0] for index in range(len(t)) if t[index][1] != 0 and len(t[index][0]) < 5]
+        sentence = random.sample(yes_parse_l5,1)[0]
+        with open("./output/parser.txt", "w", newline = "") as file:
+            print(f"Sentence : {' '.join(sents)}")
+            trees = parse(grammar,sentence)
+            for tree in trees:
+                draw_trees(tree)
+                
 
     elif args.count:
         print("ID\t Predicted_Tree\tLabeled_Tree")

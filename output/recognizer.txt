@@ -18,13 +18,23 @@ Sentence : list saturday flights .
 `list saturday flights .` is in the language of CFG.
 Sentence : list flights from cleveland .
 `list flights from cleveland .` is in the language of CFG.
+Sentence : what is the flying time from .
 `what is the flying time from .` is not in the language of CFG.
+Sentence : i can only spend a hundred fifty dollars .
 `i can only spend a hundred fifty dollars .` is not in the language of CFG.
+Sentence : what aircraft is this .
 `what aircraft is this .` is not in the language of CFG.
+Sentence : which flights are cheapest .
 `which flights are cheapest .` is not in the language of CFG.
+Sentence : what is the duration of this flight .
 `what is the duration of this flight .` is not in the language of CFG.
+Sentence : list these economy fares .
 `list these economy fares .` is not in the language of CFG.
+Sentence : which city is cheapest to fly into .
 `which city is cheapest to fly into .` is not in the language of CFG.
+Sentence : list these city destinations .
 `list these city destinations .` is not in the language of CFG.
+Sentence : are any fares cheaper than these .
 `are any fares cheaper than these .` is not in the language of CFG.
+Sentence : what area does canadian airlines international service .
 `what area does canadian airlines international service .` is not in the language of CFG.

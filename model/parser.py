@@ -1,7 +1,7 @@
 import nltk
+from nltk import Tree
 
 from typing import Set, List
-
 
 def parse(grammar: nltk.grammar.CFG, sentence: List[str]) -> Set[nltk.ImmutableTree]:
     """
@@ -14,128 +14,171 @@ def parse(grammar: nltk.grammar.CFG, sentence: List[str]) -> Set[nltk.ImmutableT
     Returns:
         tree_set: Set of generated parse trees.
     """
+    global sentence_length 
+    global sentence_glob 
+    sentence_glob = sentence
     sentence_length = len(sentence)
     print("Sentence Length :",sentence_length)
-    cky_matrix = [["" for x in range(sentence_length+1)] for x in range(sentence_length)]
+    cky_matrix = [[set() for _ in range(sentence_length+1)] for _ in range(sentence_length+1)]
+    backpointers = [[[] for _ in range(sentence_length+1)] for _ in range(sentence_length+1)]
 
-    print("Number of rows : ",len(cky_matrix))
-    print("Number of columns : ",len(cky_matrix[:][0]))
+    # print("Number of rows : ",len(cky_matrix))
+    # print("Number of columns : ",len(cky_matrix[:][0]))
 
-    assert cky_matrix[0][sentence_length] == ''
-    
+    # assert cky_matrix[0][sentence_length] == ''
+        
     for index, word in enumerate(sentence):
-        cky_matrix[index][index] = word
-        word_rules = grammar.productions(rhs = word)
-        cky_matrix[index][index+1] = [(index,index,index+1,rule.lhs(),index,index) for rule in word_rules]
+            cky_matrix[index][index] = word
+            word_rules = grammar.productions(rhs = word)
+            cky_matrix[index][index+1] = set([rule.lhs() for rule in word_rules])
+            backpointers[index][index+1].append([(index,index,index+1,rule.lhs(),word,None) for rule in word_rules])
         
     # cky_matrix
     all_rules = grammar.productions()
 
-    for b in range(2,sentence_length+2):
-        for i in range(1,sentence_length-b+1):
-            cky_matrix[i][i+b] = []
-            for k in range(1,b):
-                # print(b,i,k)
-                B = cky_matrix[i][i+k]
-                C = cky_matrix[i+k][i+b]
-                # print(B)
-                # print(C)
-                # all_lhs = []
-                
-                for indx, x in enumerate(B):
-                    for indy, y in enumerate(C):
-                        # print(x,y)
-                        lefts = [(i,i+k,i+b,rules.lhs(),indx,indy) for rules in all_rules if rules.rhs() == (x[3],y[3])]
-                        lefts = list(set(lefts))
-                        # print(lefts)
-                        # print(lefts)
-                        for left in lefts:
-                            if left not in cky_matrix[i][i+b]:
-                                cky_matrix[i][i+b].append(left)
+    for width in range(2,sentence_length+1):
+        # print(width)
+        for start in range(sentence_length - width + 1):
+            end = start + width
+            for mid in range(start + 1, end):
+                for rule in all_rules:
+                    if len(rule.rhs()) == 2:
+                        B, C = rule.rhs()
+                        if B in cky_matrix[start][mid] and C in cky_matrix[mid][end]:
+                            cky_matrix[start][end].add(rule.lhs())
+                            backpointers[start][end].append((start,mid,end,rule.lhs(),B,C))
+                            # print(backpointers[start][end][rule.lhs()])
+                            # try:
+                            #     backpointers[start][end].append((start,mid,end,B,C))
                                 
-    for b in range(2,sentence_length+1):
-        i = 0
-        cky_matrix[i][i+b] = []
-        for k in range(1,b):
-            # print(b,i,k)
-            B = cky_matrix[i][i+k]
-            C = cky_matrix[i+k][i+b]
-            # print(B)
-            # print(C)
-            # all_lhs = []
-            
-            for indx, x in enumerate(B):
-                for indy, y in enumerate(C):
-                    # print(x,y)
-                    lefts = [(i,i+k,i+b,rules.lhs(),indx,indy) for rules in all_rules if rules.rhs() == (x[3],y[3])]
-                    lefts = list(set(lefts))
-                    # print(lefts)
-                    # print(lefts)
-                    for left in lefts:
-                        if left not in cky_matrix[i][i+b]:
-                            cky_matrix[i][i+b].append(left)
-                            
-    terminal_list = [item for item in cky_matrix[0][sentence_length] if item[3] == nltk.grammar.Nonterminal("SIGMA")]
+                            # except KeyError:
+                            #     backpointers[start][end][rule.lhs()] = []
+                            #     backpointers[start][end][rule.lhs()].append((start,mid,end,B,C))
+                                
+    start_symbol = grammar.start()
 
-                            
-    # if nltk.grammar.Nonterminal("SIGMA") in cky_matrix[0][sentence_length]:
-        # print(f"True, there is the Start symbol in index {0},{sentence_length}")
-        # return True
-    # else:
-        # print(f"False, there is no Start symbol in index {0},{sentence_length}")
-        # return False
-        
-    end_list = set([(i,i+1) for i in range(sentence_length)])
-    word_list = set([(i,i) for i in range(sentence_length)])
-    all_trees = []
-
-    for element in terminal_list:
-        flag = True
-        roots = [element]
-        checked_list = []
-        # limit = 100
-        # i = 0
-        
-        while flag:
-            # i+=1
-            # if i > limit:
-            #     break
-            for root in roots:
-                print(root)
-                if type(root) != str:
-                    if root[:2] in word_list:
-                        print("oof")
-                        checked_list.append(root[1:3])
-                        continue
-                    elif (root[0],root[2]) in checked_list:
-                        print("oof2")
-                        continue
-                    else:
-                        print(f"getting children for {root}")
-                        next_x, next_y = get_children(cky_matrix, root)
-                        checked_list.append((root[0],root[2]))
-                        roots.append(next_x)
-                        roots.append(next_y)
-                        print(roots)
-                        print(checked_list)
-                    
-            assert type(roots) == list
-                
-            final_list = [(root[0],root[2]) for root in roots]
-            print("Checking")
-            flag = not(set(end_list) == set([value for value in final_list if value in end_list]))
-            print(flag)
-            
-        all_trees.append(roots)
-        
-        
-def get_children(matrix, element):
-    a,b,c,indx,indy = element[0],element[1],element[2],element[-2],element[-1]
-
-    next_x = matrix[a][b][indx]
-    next_y = matrix[b][c][indy]
+    print(start_symbol in cky_matrix[0][sentence_length])
+                         
+    terminal_list = [item for item in backpointers[0][sentence_length] if item[3] == start_symbol]
     
-    return next_x, next_y
+    if terminal_list == []:
+        print(f"{sentence} is not in the language of the CFG")
+        return None
+    else:                        
+        end_list = set([(i,i+1) for i in range(sentence_length)])
+        word_list = set([(i,i) for i in range(sentence_length)])
+        all_trees = []
+
+        for element in terminal_list:
+            flag = True
+            roots = [element]
+            checked_list = []
+            
+            while flag:
+                for root in roots:
+                    # print(root)
+                    if type(root) != str:
+                        if root[:2] in word_list:
+                            # print("oof")
+                            checked_list.append(root[1:3])
+                            # roots.append(root[4])
+                            continue
+                        elif (root[0],root[2]) in checked_list:
+                            # print("oof2")
+                            continue
+                        else:
+                            # print(f"getting children for {root}")
+                            next_x, next_y = root[-2:]
+                            checked_list.append((root[0],root[2]))
+                            if root[:2] in end_list:
+                                roots.append([x for x in backpointers[root[0]][root[1]][0] if x[3] == next_x][0])
+                            else:
+                                roots.append([x for x in backpointers[root[0]][root[1]] if x[3] == next_x][0])
+                            if root[1:3] in end_list:
+                                roots.append([y for y in backpointers[root[1]][root[2]][0] if y[3] == next_y][0])
+                            else:
+                                roots.append([y for y in backpointers[root[1]][root[2]] if y[3] == next_y][0])
+                            
+                            # print(roots)
+                            # print(checked_list)
+                            
+                    # assert type(roots) == list
+                        
+                    final_list = [(root[0],root[2]) for root in roots]
+                    # print("Checking")
+                    flag = not(set(end_list) == set([value for value in final_list if value in end_list]))
+                    
+            all_trees.append(roots) 
+               
+        imp_info = [[(leaf[0],leaf[2],leaf[3]) for leaf in tree] for tree in all_trees]
+        
+        out_set = []
+        for index in imp_info:
+            branch_dict = form_tree(index)
+            tree = build_tree(branch_dict,start_symbol)
+            out_set.append(nltk.ImmutableTree.convert(tree=tree))
+        
+        return set(out_set)
+        
+        
+def form_branch(node,node_list):
+    a = node[0]
+    c = node[1]
+    # output_child1, output_child2 = 0, 0 
+    candidate_children = [check_node for check_node in node_list if (check_node[0] == a or check_node[1] == c) and check_node != node]
+    # print(candidate_children)
+    for child1 in candidate_children:
+        # print(child1)
+        # x = child[0]
+        common = child1[1]
+        other_candidates = [x for x in candidate_children if x != child1 and x != node]
+        for child2 in other_candidates:
+            # print(child2)
+            if common == child2[0]:
+                output_child1 = child1
+                output_child2 = child2
+                                
+                return output_child1[-1], output_child2[-1], nltk.Tree(node = str(node[-1]) , children = [str(output_child1[-1]),str(output_child2[-1])])
+    # return output_child1, output_child2
+    
+def form_tree(node_list):
+    end_list = set([(i,i+1) for i in range(sentence_length)])
+    start_node = [node for node in node_list if node[:2] == (0,sentence_length)][0]
+    # print(start_node)
+    checked_list = []
+    parent_child = []
+    for node in node_list:
+        if node not in checked_list:
+            # print(parent_child)
+            # print(checked_list)
+            # print(node)
+            if node[:2] in end_list:
+                checked_list.append(node)
+                parent_child.append([node[-1],[sentence_glob[node[0]]]])
+                # print("oof")
+            else:
+                child1, child2, tree_element = form_branch(node, node_list)
+                checked_list.append(node)
+                parent_child.append([node[-1],[child1,child2]])
+            
+    # print(parent_child)
+    branch_dict = {}
+    for branch in parent_child:
+        branch_dict[branch[0]] = branch[-1]
+    # print(branch_dict)
+        
+    return branch_dict    
+
+def build_tree(grammar_dict, start_symbol):
+    if start_symbol not in grammar_dict:
+        return start_symbol  # Terminal symbol
+
+    children = grammar_dict[start_symbol]
+    if len(children) == 1 and isinstance(children[0], str):
+        return Tree(start_symbol, [children[0]])
+
+    subtrees = [build_tree(grammar_dict, child) for child in children]
+    return Tree(start_symbol, subtrees)
 
 def count(grammar: nltk.grammar.CFG, sentence: List[str]) -> int:
     """
