@@ -1,3 +1,42 @@
+"""
+File: parser.py
+
+This module defines functions for parsing sentences using a context-free grammar (CFG).
+
+Functions:
+    - parse(grammar: nltk.grammar.CFG, sentence: List[str]) -> Set[nltk.ImmutableTree]:
+        Checks whether a sentence is in the language of a given grammar and parses it.
+    - form_tree(node_list: List[Tuple[int, int, str]]) -> Dict[str, Union[str, List[str]]]:
+        Forms a tree structure from a list of nodes representing the parse.
+    - build_tree(grammar_dict: Dict[str, Union[str, List[str]]], start_symbol: str) -> nltk.Tree:
+        Builds an nltk.Tree from a dictionary representation of a parse tree.
+    - count(grammar: nltk.grammar.CFG, sentence: List[str]) -> int:
+        Computes the number of parse trees without actually computing the parse tree.
+
+Usage:
+    import nltk
+    from parser import parse, count
+
+    # Example usage with a context-free grammar and a sentence
+    cfg = nltk.CFG.fromstring('''
+        S -> NP VP
+        NP -> Det N | 'John'
+        VP -> V NP | V
+        Det -> 'the' | 'a'
+        N -> 'dog' | 'cat'
+        V -> 'chased'
+    ''')
+
+    sentence = ['John', 'chased', 'the', 'dog']
+    
+    # Parse the sentence and get the set of parse trees
+    parse_trees = parse(cfg, sentence)
+    
+    print(f"Number of parse trees: {len(parse_trees)}")
+    for tree in parse_trees:
+        print(tree.pformat())
+"""
+
 import nltk
 from nltk import Tree
 
@@ -5,10 +44,10 @@ from typing import Set, List
 
 def parse(grammar: nltk.grammar.CFG, sentence: List[str]) -> Set[nltk.ImmutableTree]:
     """
-    Check whether a sentence in the language of grammar or not. If it is, parse it.
+    Check whether a sentence is in the language of a given grammar and parse it.
 
     Args:
-        grammar: Grammar rule that is used to determine grammaticality of sentence.
+        grammar: Grammar rule that is used to determine grammaticality of the sentence.
         sentence: Input sentence that will be tested.
 
     Returns:
@@ -62,7 +101,7 @@ def parse(grammar: nltk.grammar.CFG, sentence: List[str]) -> Set[nltk.ImmutableT
     terminal_list = [item for item in backpointers[0][sentence_length] if item[3] == start_symbol]
     
     if terminal_list == []:
-        print(f"{sentence} is not in the language of the CFG")
+        # print(f"{sentence} is not in the language of the CFG")
         return None
     else:                        
         end_list = set([(i,i+1) for i in range(sentence_length)])
@@ -122,6 +161,17 @@ def parse(grammar: nltk.grammar.CFG, sentence: List[str]) -> Set[nltk.ImmutableT
         
         
 def form_branch(node,node_list):
+    """
+    Form a branch in the parse tree given a node and the list of nodes.
+
+    Args:
+        node (tuple): Tuple representing the current node in the parse tree.
+        node_list (List[tuple]): List of nodes representing the entire parse tree.
+
+    Returns:
+        tuple: A tuple containing information about the two children of the given node.
+            The tuple format is (child1, child2, nltk.Tree).
+    """
     a = node[0]
     c = node[1]
     # output_child1, output_child2 = 0, 0 
@@ -142,8 +192,17 @@ def form_branch(node,node_list):
     # return output_child1, output_child2
     
 def form_tree(node_list):
+    """
+    Form a parse tree from a list of nodes.
+
+    Args:
+        node_list (List[tuple]): List of nodes representing the entire parse tree.
+
+    Returns:
+        dict: A dictionary representing the parse tree structure with parent-child relationships.
+    """
     end_list = set([(i,i+1) for i in range(sentence_length)])
-    start_node = [node for node in node_list if node[:2] == (0,sentence_length)][0]
+    # start_node = [node for node in node_list if node[:2] == (0,sentence_length)][0]
     # print(start_node)
     checked_list = []
     parent_child = []
@@ -157,7 +216,7 @@ def form_tree(node_list):
                 parent_child.append([node[-1],[sentence_glob[node[0]]]])
                 # print("oof")
             else:
-                child1, child2, tree_element = form_branch(node, node_list)
+                child1, child2, _ = form_branch(node, node_list)
                 checked_list.append(node)
                 parent_child.append([node[-1],[child1,child2]])
             
@@ -167,9 +226,19 @@ def form_tree(node_list):
         branch_dict[branch[0]] = branch[-1]
     # print(branch_dict)
         
-    return branch_dict    
+    return branch_dict
 
 def build_tree(grammar_dict, start_symbol):
+    """
+    Build a parse tree from a dictionary representing the parse tree structure.
+
+    Args:
+        grammar_dict (dict): Dictionary representing the parse tree structure with parent-child relationships.
+        start_symbol: Starting symbol of the parse tree.
+
+    Returns:
+        nltk.Tree: A parse tree represented using the nltk.Tree class.
+    """
     if start_symbol not in grammar_dict:
         return start_symbol  # Terminal symbol
 

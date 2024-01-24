@@ -1,28 +1,50 @@
+"""
+File: recognizer.py
+
+This module defines a function for recognizing whether a given sentence belongs to the language defined by a given context-free grammar (CFG).
+
+Functions:
+    - recognize(grammar: nltk.grammar.CFG, sentence: List[str]) -> bool:
+        Recognizes whether a sentence is in the language defined by the grammar.
+
+Usage:
+    import nltk
+    from recognizer import recognize
+
+    # Example usage with a context-free grammar and a sentence
+    cfg = nltk.CFG.fromstring('''
+        S -> NP VP
+        NP -> Det N | 'John'
+        VP -> V NP | V
+        Det -> 'the' | 'a'
+        N -> 'dog' | 'cat'
+        V -> 'chased'
+    ''')
+
+    sentence = ['John', 'chased', 'the', 'dog']
+    is_in_language = recognize(cfg, sentence)
+    print(f"The sentence is in the language: {is_in_language}")
+"""
 from typing import List
 import nltk
 
 def recognize(grammar: nltk.grammar.CFG, sentence: List[str]) -> bool:
     """
-    Recognize whether a sentence in the language of grammar or not.
+    Recognize whether a sentence is in the language defined by a given context-free grammar.
 
     Args:
-        grammar: Grammar rule that is used to determine grammaticality of sentence.
-        sentence: Input sentence that will be tested.
+        grammar (nltk.grammar.CFG): Grammar rule that is used to determine the grammaticality of the sentence.
+        sentence (List[str]): Input sentence that will be tested.
 
     Returns:
-        truth_value: A bool value to determine whether if the sentence
-        is in the grammar provided or not.
+        bool: A boolean value indicating whether the sentence is in the grammar provided or not.
     """
-    
-    # print(f"Sentence : {''.join(sentence)}")
     sentence_length = len(sentence)
     print("Sentence Length :",sentence_length)
     cky_matrix = [[set() for _ in range(sentence_length+1)] for _ in range(sentence_length+1)]
 
     print("Number of rows : ",len(cky_matrix))
     print("Number of columns : ",len(cky_matrix[:][0]))
-
-    # assert cky_matrix[0][sentence_length] == ""
 
     for index, word in enumerate(sentence):
         cky_matrix[index][index] = word
@@ -42,7 +64,6 @@ def recognize(grammar: nltk.grammar.CFG, sentence: List[str]) -> bool:
                             cky_matrix[start][end].add(rule.lhs())
                             
     start_symbol = grammar.start()
-    
     return start_symbol in cky_matrix[0][sentence_length]
 
     # less efficient method that checks all rules to see if B and C produce a rhs. Above method goes throught the
